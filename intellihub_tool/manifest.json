@@ -1,0 +1,81 @@
+{
+  "name": "intellihub",
+  "version": "0.2.0",
+  "description": "Provides structured, read-only access to the MonTamerGens ai_context knowledge hub.",
+  "functions": [
+    {
+      "name": "list_files",
+      "description": "Returns a list of all files within the ai_context directory.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "read_file",
+      "description": "Reads and returns the contents of a Markdown file using a relative path from ai_context.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Relative path to the file, e.g. 'lore_core.md' or 'schemas/seed_type_schema.md'."
+          }
+        },
+        "required": ["path"]
+      }
+    },
+    {
+      "name": "search",
+      "description": "Searches across all Markdown files in ai_context and returns matching snippets.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search term to look for within the documentation."
+          }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "get_schema",
+      "description": "Returns the contents of a schema file from the schemas/ directory.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Schema name without suffix, e.g. 'seed_type' or 'mutagen'."
+          }
+        },
+        "required": ["name"]
+      }
+    },
+    {
+      "name": "get_module_purpose",
+      "description": "Returns the contents of a module purpose file from module_purposes/.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Module name without suffix, e.g. 'monsterseed' or 'mon_forge'."
+          }
+        },
+        "required": ["name"]
+      }
+    },
+    {
+      "name": "diagnose",
+      "description": "Performs a full health check of the ai_context knowledge capsule, verifying path validity, file inventory, schema health, module purpose health, search index functionality, and overall status.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  ]
+}
