@@ -6,7 +6,12 @@ from mcp.server import Server
 from mcp import types
 from mcp.server.websocket import websocket_server
 from starlette.applications import Starlette
-from starlette.routing import WebSocketRoute
+from starlette.routing import WebSocketRoute, Route
+from starlette.responses import JSONResponse
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
+
+
 
 import tool as tool_impl
 
@@ -142,9 +147,28 @@ async def mcp_endpoint(websocket):
         )
 
 
-routes = [WebSocketRoute("/mcp", mcp_endpoint)]
+async def health_check(request):
+    """Health check endpoint."""
+    return JSONResponse({"status": "ok"})
 
-app = Starlette(routes=routes)
+
+routes = [
+    WebSocketRoute("/mcp", mcp_endpoint),
+    Route("/health", health_check),
+]
+
+# Enables CORS
+middleware = [
+    Middleware(
+        CORSMiddleware,
+        allow_origins=['*'],
+        allow_credentials=True,
+        allow_methods=['*'],
+        allow_headers=['*']
+    )
+]
+
+app = Starlette(routes=routes, middleware=middleware)
 
 
 if __name__ == "__main__":

@@ -76,4 +76,3 @@ def format_diagnostic_report(report):
     add("=== End of Report ===")
 
     return "\n".join(lines)
-

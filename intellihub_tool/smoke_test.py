@@ -1,5 +1,8 @@
 import json
 import os
+import subprocess
+import time
+import httpx
 import tool  # assumes you're running this from inside intellihub_tool/
 
 print("=== IntelliHub MCP Smoke Test ===")
@@ -65,3 +68,40 @@ except Exception as e:
     print("❌ ERROR:", e)
 
 print("\n=== Smoke Test Complete ===")
+
+
+print("\n[7] Testing server health check...")
+server_process = None
+try:
+    # Start the server as a separate process
+    server_process = subprocess.Popen(["python", "server.py"])
+    # Give the server a moment to start
+    time.sleep(2)
+
+    # Make a request to the health check endpoint
+    headers = {"Origin": "http://example.com"}
+    response = httpx.get("http://127.0.0.1:8000/health", headers=headers)
+
+    # Check the response
+    if response.status_code == 200:
+        print("✅ Health check status code is 200.")
+    else:
+        print(f"❌ ERROR: Health check status code is {response.status_code}.")
+
+    if response.json() == {"status": "ok"}:
+        print("✅ Health check response body is correct.")
+    else:
+        print(f"❌ ERROR: Health check response body is {response.json()}.")
+
+    if response.headers.get("access-control-allow-origin") == "*":
+        print("✅ CORS header is correct.")
+    else:
+        print(f"❌ ERROR: CORS header is {response.headers.get('access-control-allow-origin')}.")
+
+except Exception as e:
+    print(f"❌ ERROR: {e}")
+finally:
+    if server_process:
+        server_process.terminate()
+        server_process.wait()
+        print("✅ Server process terminated.")

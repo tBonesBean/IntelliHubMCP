@@ -1,0 +1,8 @@
+{
+	"mcpServers": {
+		"Intellihub": {
+			"command": "python",
+			"args": ["./server.py", "--mcp"]
+		}
+	}
+}
