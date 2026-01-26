@@ -133,7 +133,7 @@ These constraints ensure safety, stability, and predictable behavior.
 
 For clients that support stdio communication (like Claude Desktop):
 - Command: `python`
-- Args: `d:/Projects/mcp/intellihub_tool/stdio_server.py` (adjust path as needed)
+- Args: `stdio_server.py` (or use absolute path if running from outside the intellihub_tool directory)
 
 > Ensure `config/paths.json` points to your local `ai_context` root.
 
