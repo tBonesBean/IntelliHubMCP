@@ -1,26 +1,10 @@
 {
 	"servers": {
-		"IntelliHub_stdio": {
-			"type": "stdio",
-			"command": "python.exe",
-			"args": [
-				"C:\\Services\\IntelliHubMCP\\intellihub_tool\\stdio_server.py",
-				"--host",
-				"localhost",
-				"--port",
-				"8002"
-			]
-		},
-		"Intellihub_stdio": {
+		"intellihub_stdio": {
 			"type": "stdio",
 			"command": "python",
 			"args": [
-				"stdio_server.py",
-				"--host",
-				"localhost",
-				"--port",
-				"8002",
-				"--mcp"
+				"stdio_server.py"
 			]
 		}
 	},
