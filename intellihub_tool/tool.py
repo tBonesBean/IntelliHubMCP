@@ -71,10 +71,12 @@ def read_file(path):
         FileNotFoundError: If file doesn't exist
     """
     # Security: Prevent directory traversal attacks
-    full_path = os.path.abspath(os.path.join(AI_CONTEXT, path))
-    ai_context_abs = os.path.abspath(AI_CONTEXT)
+    # Use realpath to resolve symlinks and normalize paths
+    full_path = os.path.realpath(os.path.join(AI_CONTEXT, path))
+    ai_context_abs = os.path.realpath(AI_CONTEXT)
     
-    if not full_path.startswith(ai_context_abs):
+    # Ensure the resolved path is within ai_context (with proper separator check)
+    if not (full_path == ai_context_abs or full_path.startswith(ai_context_abs + os.sep)):
         raise ValueError(f"Access denied: path '{path}' is outside ai_context directory")
     
     # Validate file exists and is a file
