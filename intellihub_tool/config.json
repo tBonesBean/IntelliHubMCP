@@ -1,8 +1,10 @@
 {
 	"mcpServers": {
 		"Intellihub": {
+			"type": "mcp",
+			"manifestPath": "./manifest.json",
 			"command": "python",
-			"args": ["./server.py", "--mcp"]
+			"args": ["./server.py", "--host", "localhost", "--port", "8002", "--mcp"]
 		}
 	}
 }
