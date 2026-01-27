@@ -2,6 +2,8 @@ import json
 import os
 import subprocess
 import time
+from pathlib import Path
+
 import httpx
 import tool  # assumes you're running this from inside intellihub_tool/
 
@@ -9,7 +11,8 @@ print("=== IntelliHub MCP Smoke Test ===")
 
 # 1. Check config path
 print("\n[1] Checking config path...")
-with open(os.path.join("config", "paths.json"), "r") as f:
+config_path = Path(__file__).resolve().parent / "config" / "paths.json"
+with open(config_path, "r") as f:
     cfg = json.load(f)
 
 ai_path = cfg.get("ai_context_path")
@@ -96,7 +99,9 @@ try:
     if response.headers.get("access-control-allow-origin") == "*":
         print("✅ CORS header is correct.")
     else:
-        print(f"❌ ERROR: CORS header is {response.headers.get('access-control-allow-origin')}.")
+        print(
+            f"❌ ERROR: CORS header is {response.headers.get('access-control-allow-origin')}."
+        )
 
 except Exception as e:
     print(f"❌ ERROR: {e}")

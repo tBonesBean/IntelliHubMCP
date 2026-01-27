@@ -3,9 +3,7 @@
 		"IntelliHub_stdio": {
 			"type": "stdio",
 			"command": "python",
-			"args": [
-				"C:\\Services\\IntelliHubMCP\\intellihub_tool\\stdio_server.py"
-			]
+			"args": ["C:\\Services\\IntelliHubMCP\\intellihub_tool\\stdio_server.py"]
 		},
 		"Intellihub": {
 			"command": "python",
