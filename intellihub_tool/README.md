@@ -144,3 +144,4 @@ For clients that support stdio communication (like Claude Desktop):
 - Manifest: `intellihub_tool/manifest.json` (name: `intellihub`, version: `0.2.0`).
 - Quick endpoint check (from `intellihub_tool/`): `python scripts/check_endpoint.py --host 127.0.0.1 --port 8000 --path /mcp`.
 - On success you should see JSON-RPC responses for `initialize` and `tools/list`.
+
